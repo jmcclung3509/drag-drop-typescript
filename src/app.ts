@@ -9,7 +9,7 @@ interface Draggable {
 interface DragTarget {
   dragOverHandler(event: DragEvent): void; //The dragover event is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).
 
-  dropHandler(event: DragTarget): void; //React to actual drop event
+  dropHandler(event: DragEvent): void; //React to actual drop event
 
   dragLeaveHandler(event: DragEvent): void; //The dragleave event is fired when a dragged element or text selection leaves a valid drop target.
 } //PrjocetList Class - the boxes active and finsihed are the drag targets
@@ -225,7 +225,7 @@ class ProjectItem
   }
 
   @Autobind
-  dragEndHandler(event: DragEvent) {}
+  dragEndHandler(_: DragEvent) {}
 
   configure() {
     this.element.addEventListener(
@@ -275,6 +275,7 @@ class ProjectList
     if (event.dataTransfer && event.dataTransfer.types[0] === "text/plain") {
       event.preventDefault(); //allows the drop event
       const listEL = this.element.querySelector("ul")!;
+      console.log(listEL);
       listEL.classList.add("droppable");
     }
   }
