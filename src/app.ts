@@ -1,5 +1,3 @@
-//drag and drop interfaces
-
 interface Draggable {
   dragStartHandler(event: DragEvent): void; //listens to the start of the drag event
 
@@ -78,7 +76,7 @@ class ProjectState extends State<Project> {
     const project = this.projects.find((prj) => {
       return prj.id === projectId;
     });
-    if (project) {
+    if (project && project.status !== newStatus) {
       project.status = newStatus;
       this.updateListeners();
     }
@@ -214,9 +212,6 @@ class ProjectItem
   constructor(hostId: string, project: Project) {
     super("single-project", hostId, false, project.id);
     this.project = project;
-    console.log(
-      `ProjectItem created for project: ${this.project.title}, ${this.project.id}`
-    );
   }
 
   dragStartHandler(event: DragEvent) {
@@ -448,3 +443,4 @@ const projectEl = new ProjectInput(); //Calls the constructor
 
 const activeProjectList = new ProjectList("active");
 const finishedProjectList = new ProjectList("finished");
+//drag and drop interfaces
