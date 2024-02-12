@@ -19,7 +19,6 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-
-    "npm": "^10.4.0"
+    "vercel": "^33.5.0"
   }
 }
