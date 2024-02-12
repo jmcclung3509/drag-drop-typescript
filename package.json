@@ -1,11 +1,12 @@
 {
-  "name": "understanding-typescript",
+  "name": "drag-and-drop",
   "version": "1.0.0",
-  "description": "Understanding TypeScript Course Setup",
+  "description": "Drag and Drag with Typescript",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "lite-server"
+    "start": "lite-server",
+    "build": "tsc"
   },
   "keywords": [
     "typescript",
@@ -14,9 +15,11 @@
   "author": "Maximilian Schwarzmüller",
   "license": "ISC",
   "devDependencies": {
-    "lite-server": "^2.5.4"
+    "lite-server": "^2.5.4",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
+
     "npm": "^10.4.0"
   }
 }
