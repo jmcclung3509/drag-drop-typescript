@@ -55,7 +55,9 @@ button:active {
 	background: #a80041;
 	border-color: #a80041;
 }
-
+h1{
+	margin-left: 12%;
+}
 .projects {
 	margin: 1rem;
 	border: 1px solid #ff0062;

@@ -24,7 +24,7 @@ class Project {
     public id: string,
     public title: string,
     public description: string,
-    public people: number,
+    public rating: number,
     public status: ProjectStatus
   ) {}
 }
@@ -55,18 +55,12 @@ class ProjectState extends State<Project> {
     return this.instance;
   }
 
-  addProject(title: string, description: string, numOfPeople: number) {
-    // const newProject = {
-    // 	id: Math.random().toString(),
-    // 	title: title,
-    // 	description: description,
-    // 	people: numOfPeople
-    // };
+  addProject(title: string, description: string, bookRating: number) {
     const newProject = new Project(
       Math.random().toString(),
       title,
       description,
-      numOfPeople,
+      bookRating,
       ProjectStatus.Active
     );
     this.projects.push(newProject);
@@ -201,11 +195,11 @@ class ProjectItem
 {
   private project: Project;
 
-  get persons() {
-    if (this.project.people === 1) {
-      return "1 person";
+  get rating() {
+    if (this.project.rating === 1) {
+      return "1 star";
     } else {
-      return `${this.project.people} people`;
+      return `${this.project.rating} stars`;
     }
   }
 
@@ -232,13 +226,14 @@ class ProjectItem
 
   renderContent() {
     const titleElement = this.element.querySelector("h2");
-    const personsElement = this.element.querySelector("h3");
+    const ratingElement = this.element.querySelector("h3");
     const descriptionElement = this.element.querySelector("p");
 
-    if (titleElement && personsElement && descriptionElement) {
+    if (titleElement && ratingElement && descriptionElement) {
       titleElement.textContent = this.project.title;
-      personsElement.textContent = this.persons + " assigned";
+
       descriptionElement.textContent = this.project.description;
+      ratingElement.textContent = this.rating;
     } else {
       console.error("One or more elements not found in renderContent");
     }
@@ -349,7 +344,7 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
   // element: HTMLFormElement; //FORM
   titleInputElement: HTMLInputElement; //Form Title
   descriptionInputElement: HTMLInputElement; //Form Description
-  peopleInputElement: HTMLInputElement; //Number of people
+  ratingInputElement: HTMLInputElement; //Number of stars
 
   constructor() {
     super("project-input", "app", true, "user-input");
@@ -365,8 +360,8 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
     this.descriptionInputElement = this.element.querySelector(
       "#description"
     ) as HTMLInputElement;
-    this.peopleInputElement = this.element.querySelector(
-      "#people"
+    this.ratingInputElement = this.element.querySelector(
+      "#rating"
     ) as HTMLInputElement;
 
     // this.attach(); //Attach the form to the DOM
@@ -379,7 +374,7 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
     //TUPLE   Return a tuple or nothing.  A Tuple is an array with fixed elements and types
     const enteredTitle = this.titleInputElement.value;
     const enteredDescript = this.descriptionInputElement.value;
-    const enteredPeople = this.peopleInputElement.value;
+    const enteredRating = this.ratingInputElement.value;
 
     const titleValidatable: Validatable = {
       value: enteredTitle,
@@ -390,11 +385,11 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
       required: true,
       minLength: 5,
     };
-    const peopleValidatable: Validatable = {
-      value: +enteredPeople,
+    const ratingValidatable: Validatable = {
+      value: +enteredRating,
       required: true,
       min: 1,
-      max: 10,
+      max: 5,
     };
 
     //make sure input is not empty
@@ -402,11 +397,11 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
     if (
       !validate(titleValidatable) ||
       !validate(descriptionValidatable) ||
-      !validate(peopleValidatable)
+      !validate(ratingValidatable)
     ) {
       alert("please enter valid input");
     } else {
-      return [enteredTitle, enteredDescript, +enteredPeople]; //Return your tuple
+      return [enteredTitle, enteredDescript, +enteredRating]; //Return your tuple
     }
   }
 
@@ -425,10 +420,10 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
       // const title=userInput[0];
       // const desc=userInput[1];
       // const people=userInput[2];
-      const [title, desc, people] = userInput;
-      console.log(title, desc, people);
+      const [title, desc, rating] = userInput;
+      console.log(title, desc, rating);
 
-      projectState.addProject(title, desc, people);
+      projectState.addProject(title, desc, rating);
       this.clearInputs();
     }
   }
@@ -436,7 +431,7 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
   private clearInputs() {
     this.titleInputElement.value = "";
     this.descriptionInputElement.value = "";
-    this.peopleInputElement.value = "";
+    this.ratingInputElement.value = "";
   }
 }
 const projectEl = new ProjectInput(); //Calls the constructor
