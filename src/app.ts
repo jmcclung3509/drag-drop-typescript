@@ -406,8 +406,8 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
     const ratingValidatable: Validatable = {
       value: +enteredRating,
       required: true,
-      min: 1,
-      max: 5,
+      min: 0,
+      max: 6,
     };
 
     //make sure input is not empty
