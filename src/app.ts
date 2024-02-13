@@ -25,6 +25,8 @@ class Project {
     public title: string,
     public description: string,
     public rating: number,
+    public dateAdded: Date,
+    public dateFinished: Date | null,
     public status: ProjectStatus
   ) {}
 }
@@ -56,11 +58,14 @@ class ProjectState extends State<Project> {
   }
 
   addProject(title: string, description: string, bookRating: number) {
+    const currentDate = new Date();
     const newProject = new Project(
       Math.random().toString(),
       title,
       description,
       bookRating,
+      currentDate,
+      null,
       ProjectStatus.Active
     );
     this.projects.push(newProject);
@@ -71,6 +76,9 @@ class ProjectState extends State<Project> {
       return prj.id === projectId;
     });
     if (project && project.status !== newStatus) {
+      if (newStatus === ProjectStatus.Finished) {
+        project.dateFinished = new Date();
+      }
       project.status = newStatus;
       this.updateListeners();
     }
@@ -194,6 +202,16 @@ class ProjectItem
   implements Draggable
 {
   private project: Project;
+  private getDateAndStatus(): string {
+    if (
+      this.project.status === ProjectStatus.Finished &&
+      this.project.dateFinished
+    ) {
+      return `Added: ${this.project.dateAdded.toLocaleDateString()} -- Finished: ${this.project.dateFinished.toLocaleDateString()} `;
+    } else {
+      return `Added: ${this.project.dateAdded.toLocaleDateString()}`;
+    }
+  }
 
   get rating() {
     if (this.project.rating === 1) {
@@ -228,12 +246,13 @@ class ProjectItem
     const titleElement = this.element.querySelector("h2");
     const ratingElement = this.element.querySelector("h3");
     const descriptionElement = this.element.querySelector("p");
+    const dateElement = this.element.querySelector("span")!;
 
     if (titleElement && ratingElement && descriptionElement) {
       titleElement.textContent = this.project.title;
-
       descriptionElement.textContent = this.project.description;
       ratingElement.textContent = this.rating;
+      dateElement.innerHTML = this.getDateAndStatus();
     } else {
       console.error("One or more elements not found in renderContent");
     }
@@ -316,7 +335,6 @@ class ProjectList
   }
 
   private renderProjects() {
-    console.log("Rendering projects:", this.assignedProjects);
     const listEl = document.getElementById(
       `${this.type}-projects-list`
     )! as HTMLUListElement;
@@ -421,9 +439,10 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
       // const desc=userInput[1];
       // const people=userInput[2];
       const [title, desc, rating] = userInput;
-      console.log(title, desc, rating);
+      const currentDate = new Date();
+      console.log(title, desc, rating, currentDate);
 
-      projectState.addProject(title, desc, rating);
+      projectState.addProject(title, desc, rating); // Convert date to a Date object
       this.clearInputs();
     }
   }
