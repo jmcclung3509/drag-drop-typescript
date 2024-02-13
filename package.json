@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "lite-server",
-    "build": "tsc",
-    "vercel-build": "vercel --build"
+    "build": "tsc"
+
 
 
   },
@@ -20,8 +20,5 @@
   "devDependencies": {
     "lite-server": "^2.5.4",
     "typescript": "^5.3.3"
-  },
-  "dependencies": {
-    "vercel": "^33.5.0"
   }
 }
