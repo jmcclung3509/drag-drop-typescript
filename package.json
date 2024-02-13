@@ -6,13 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "lite-server",
-    "build": "tsc"
+    "build": "tsc",
+    "vercel-build": "vercel --build"
+
+
   },
   "keywords": [
     "typescript",
     "course"
   ],
-  "author": "Maximilian Schwarzmüller",
+  "author": "Jessica Turner",
   "license": "ISC",
   "devDependencies": {
     "lite-server": "^2.5.4",

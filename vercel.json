@@ -1,0 +1,11 @@
+{
+  "version": 2,
+    "builds": [
+      { "src": "dist/**/*", "use": "@vercel/static" },
+      { "src": "package.json", "use": "@vercel/node" },
+      { "src": "tsconfig.json", "use": "@vercel/node" },
+      { "src": ".npmrc", "use": "@vercel/node" },
+      { "src": ".env*", "use": "@vercel/node" },
+      { "src": "!(dist|node_modules)/**/*", "use": "@vercel/node" }
+    ]
+  }
