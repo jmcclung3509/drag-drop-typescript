@@ -1,11 +1,12 @@
-/// <reference path ="base-component.ts"/>
-///<reference path ="../decorators/autobind.ts"/>
-/// <reference path ="../decorators/autobind.ts"/>
-/// <reference path ="../interfaces/draggable.ts"/>
+import { Draggable } from "../models/draggable.js"; // JS FILE
+import { Project } from "../models/project.js"; // JS FILE
+// import { Component } from "./base-component.js"; // JS FILE
+import Cmp from "./base-component.js"; // JS FILE
+import { Autobind } from "../decorators/autobind.js"; // JS FILE
+import { ProjectStatus } from "../models/project.js"; // JS FILE
 
-namespace App {
 export class ProjectItem
-  extends Component<HTMLUListElement, HTMLLIElement>
+  extends Cmp<HTMLUListElement, HTMLLIElement>
   implements Draggable
 {
   private project: Project;
@@ -64,5 +65,4 @@ export class ProjectItem
       console.error("One or more elements not found in renderContent");
     }
   }
-}
 }

@@ -1,9 +1,13 @@
+// import { Component } from "./base-component.js";
+import Cmp from "./base-component.js";
+import { ProjectItem } from "./project-item.js";
+import { Project, ProjectStatus } from "../models/project.js";
+import { Autobind } from "../decorators/autobind.js";
+import { DragTarget } from "../models/draggable.js";
+import { projectState } from "../state/state.js";
 
-/// <reference path ="base-component.ts"/>
-
-namespace App {
-    export class ProjectList
-  extends Component<HTMLDivElement, HTMLElement>
+export class ProjectList
+  extends Cmp<HTMLDivElement, HTMLElement>
   implements DragTarget
 {
   //DRAG TARGET
@@ -96,6 +100,4 @@ namespace App {
       listEl.appendChild(projectItemComponent.element); //pass id of host element (ul) and item (li), but this.element is not the UL but the section-
     }
   }
-}
-
 }

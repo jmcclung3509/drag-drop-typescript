@@ -1,7 +1,8 @@
-namespace App {
-  type Listener<T> = (items: T[]) => void; //Don't need any return type
+import { Project, ProjectStatus } from "../models/project.js";
 
- class State<T> {
+type Listener<T> = (items: T[]) => void; //Don't need any return type
+
+class State<T> {
   protected listeners: Listener<T>[] = []; //array of function
   addListener(listenerFn: Listener<T>) {
     this.listeners.push(listenerFn);
@@ -60,4 +61,3 @@ export class ProjectState extends State<Project> {
 
 // const projectState= new ProjectState();
 export const projectState = ProjectState.getInstance();
-}
