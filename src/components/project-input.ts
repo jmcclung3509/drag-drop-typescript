@@ -1,8 +1,8 @@
-import Cmp from "./base-component.js";
-// import { Validatable, validate } from "../utilities/validatable.js";
-import * as Validation from "../utilities/validatable.js"; //GROUPING
-import { Autobind } from "../decorators/autobind.js";
-import { projectState } from "../state/state.js";
+import Cmp from "./base-component";
+// import { Validatable, validate } from "../utilities/validatable";
+import * as Validation from "../utilities/validatable"; //GROUPING
+import { Autobind } from "../decorators/autobind";
+import { projectState } from "../state/state";
 
 export class ProjectInput extends Cmp<HTMLDivElement, HTMLFormElement> {
   // templateElement: HTMLTemplateElement; //The <template> HTML element serves as a mechanism for holding HTML fragments, which can either be used later via JavaScript or generated immediately into shadow DOM.

@@ -1,9 +1,9 @@
-import { Draggable } from "../models/draggable.js"; // JS FILE
-import { Project } from "../models/project.js"; // JS FILE
-// import { Component } from "./base-component.js"; // JS FILE
-import Cmp from "./base-component.js"; // JS FILE
-import { Autobind } from "../decorators/autobind.js"; // JS FILE
-import { ProjectStatus } from "../models/project.js"; // JS FILE
+import { Draggable } from "../models/draggable"; // JS FILE
+import { Project } from "../models/project"; // JS FILE
+// import { Component } from "./base-component"; // JS FILE
+import Cmp from "./base-component"; // JS FILE
+import { Autobind } from "../decorators/autobind"; // JS FILE
+import { ProjectStatus } from "../models/project"; // JS FILE
 
 export class ProjectItem
   extends Cmp<HTMLUListElement, HTMLLIElement>
